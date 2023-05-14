@@ -5,11 +5,16 @@ This repository features the data files, code files and additional information t
 
 The files included within the repository are:
 
-Session Notes.docx - The step by step commentary and exercises for the session
+An Intro to R.docx - The step by step commentary and exercises for the session
+
 Slides.pdf - Slides used in the presentation
+
 citiesdata.csv - Cleaned dataset used for the session
+
 codes.txt - Codes used for the examples in the notes
+
 solutions.txt - Codes used to create the solutions
+
 Additional Materials - Additional elements not included within the main document.
 
 This session is based upon data downloaded from Eurostat and discussed in the paper by Castelli et al. (2023). Reference is also made to the work of Wickham (2011) and Wickham and Grolemund (2016). 
