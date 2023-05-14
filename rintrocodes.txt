@@ -1,0 +1,100 @@
+#########################################
+# This code file accompanies Intro to R #
+#########################################
+
+# Summary
+
+summary(citiesdata)
+
+# Brigning in packages (Remember packages must be installed first)
+
+library(tidyverse) # This is how we tell R we wish to use packages
+
+# R as a calculator (These are just examples)
+
+2+2
+3*4
+4/12
+9^2
+9^0.5
+
+# Plotting (Basic R)
+
+plot(citiesdata$ptrans,citiesdata$lives,xlab="Public Transport",ylab="Satisfaction")
+
+# Plotting (ggplot)
+
+ggplot(data = citiesdata) +
+ geom_point(mapping = aes(x = ptrans, y = lives))
+
+# Making New Variables
+
+citiesdata$highlives<-as.numeric(citiesdata$lives>90)
+citiesdata$country<-substr(citiesdata$CODE,1,2)
+
+# Plotting (ggplot)
+
+ggplot(data = citiesdata) +
+ geom_point(mapping = aes(x = ptrans, y = lives, size = highlives)) +
+ labs(x = "Public Transport", y = "Life Satisfaction")
+
+# Change to have two of our explanatory variables
+
+ggplot(data = citiesdata) +
+ geom_point(mapping = aes(x = ptrans, y = afford, size = highlives)) +
+ labs(x = "Public Transport", y = "Affordability of Houses")
+
+# Now add some colour
+
+ggplot(data = citiesdata) +
+ geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = country)) +
+ labs(x = "Public Transport", y = "Affordability of Houses")
+
+citiesdata$italy<-as.numeric(citiesdata$country=="IT")
+
+ggplot(data = citiesdata) +
+ geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = italy)) +
+ labs(x = "Public Transport", y = "Affordability of Houses") 
+
+citiesdata$italy<-as.numeric(citiesdata$country=="IT")
+
+ggplot(data = citiesdata) +
+ geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = italy)) +
+ labs(x = "Public Transport", y = "Affordability of Houses") 
+
+
+#####
+
+ggplot(data = citiesdata) +
+ geom_bar(mapping = aes(x = country))+
+ labs(x = "Country", y = "Number of Cities")
+
+ggplot(data = citiesdata) +
+ geom_bar(mapping = aes(x = country, fill=country)) +
+ labs(x = "Country", y = "Number of Cities")
+
+ggplot(data = citiesdata) +
+ geom_bar(mapping = aes(x = country, fill=italy), show.legend = FALSE) +
+ labs(x = "Country", y = "Number of Cities")
+
+ggplot(data = citiesdata) +
+ geom_bar(mapping = aes(x = country, fill=highlives, group=highlives), show.legend = FALSE)
+ labs(x = "Country", y = "Number of Cities")
+
+####################################
+# Arranging Data and Manipulations #
+####################################
+
+arrange(citiesdata,lives)
+
+# Using desc for descending
+
+arrange(citiesdata,desc(lives))
+
+# Summarise
+
+by_country<-group_by(citiesdata,country)
+clives<-summarise(by_country,mlives=mean(lives,na.rm=TRUE))
+
+clives2<-summarise(by_country,obs=n(),mlives=mean(lives,na.rm=TRUE),sdlives=sd(lives,na.rm=TRUE),minlives=min(lives,na.rm=TRUE),q25lives=quantile(lives,0.25,na.rm=TRUE),q50lives=quantile(lives,0.50,na.rm=TRUE),q75lives=quantile(lives,0.75,na.rm=TRUE),maxlives=max(lives,na.rm=TRUE))
+
