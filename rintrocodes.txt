@@ -2,19 +2,15 @@
 # This code file accompanies Intro to R #
 #########################################
 
-# The use of the # tells R that the line does not contain code. Therefore we can use # to add descriptions about what the code is doing.
-
-# Summary on Page 6
+# Summary
 
 summary(citiesdata)
 
-# Brigning in packages (Remember packages must be installed first) on Page 8
-
-install.packages("tidyverse") # To install a package state the names in " "
+# Brigning in packages (Remember packages must be installed first)
 
 library(tidyverse) # This is how we tell R we wish to use packages
 
-# R as a calculator (These are just examples) on Page 9
+# R as a calculator (These are just examples)
 
 2+2
 3*4
@@ -22,61 +18,63 @@ library(tidyverse) # This is how we tell R we wish to use packages
 9^2
 9^0.5
 
-a<-2
-b<-3
-a+b
-
-# Making New Variables on Page 9
-
-citiesdata$highlives<-as.numeric(citiesdata$lives>90)
-citiesdata$country<-substr(citiesdata$CODE,1,2)
-
-# Plotting (Basic R) on Page 10
+# Plotting (Basic R)
 
 plot(citiesdata$ptrans,citiesdata$lives,xlab="Public Transport",ylab="Satisfaction")
 
-# Plotting (ggplot) on Page 11
+# Plotting (ggplot)
 
 ggplot(data = citiesdata) +
  geom_point(mapping = aes(x = ptrans, y = lives))
 
+# Making New Variables
 
-# Plotting (ggplot) on Page 12 and 13
+citiesdata$highlives<-as.numeric(citiesdata$lives>90)
+citiesdata$country<-substr(citiesdata$CODE,1,2)
 
-ggplot(data = citiesdata) +
- geom_point(mapping = aes(x = ptrans, y = lives, size = highlives)) +
- labs(x = "Public Transport", y = "Life Satisfaction")
-
-# Change to have two of our explanatory variables on Page 14
+# Plotting (ggplot)
 
 ggplot(data = citiesdata) +
- geom_point(mapping = aes(x = ptrans, y = afford, size = highlives)) +
- labs(x = "Public Transport", y = "Affordability of Houses")
+ geom_point(mapping = aes(x = ptrans, y = lives, size = highlives))
 
-# Now add some colour on Page 15
-
-ggplot(data = citiesdata) +
- geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = country)) +
- labs(x = "Public Transport", y = "Affordability of Houses")
-
-
-
-#################################
-# Bar Charts with ggplot	#
-#################################
+# Change to have two of our explanatory variables
 
 ggplot(data = citiesdata) +
- geom_bar(mapping = aes(x = country))+
- labs(x = "Country", y = "Number of Cities")
+ geom_point(mapping = aes(x = ptrans, y = afford, size = highlives))
+
+# Now add some colour
 
 ggplot(data = citiesdata) +
- geom_bar(mapping = aes(x = country, fill=country)) +
- labs(x = "Country", y = "Number of Cities")
+ geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = country))
+
+# Now add some lines
+
+ggplot(data = citiesdata) +
+ geom_smooth(mapping = aes(x = ptrans, y = afford, group = highlives, color = highlives))
+
+# Now add some lines
+
+ggplot(data = citiesdata) +
+ geom_smooth(mapping = aes(x = ptrans, y = lives, group = highlives, color = highlives))
+
+# Try the same exercise with affordability
 
 
 ggplot(data = citiesdata) +
- geom_bar(mapping = aes(x = country, fill=highlives, group=highlives), show.legend = FALSE)
- labs(x = "Country", y = "Number of Cities")
+ geom_smooth(mapping = aes(x = afford, y = lives, group = highlives, color = highlives))
+
+
+#####
+
+ggplot(data = citiesdata) +
+ geom_bar(mapping = aes(x = country))
+
+ggplot(data = citiesdata) +
+ geom_bar(mapping = aes(x = country, fill=country))
+
+ggplot(data = citiesdata) +
+ geom_bar(mapping = aes(x = country, fill=highlives, group=highlives))
+
 
 ####################################
 # Arranging Data and Manipulations #
@@ -86,7 +84,7 @@ arrange(citiesdata,lives)
 
 # Using desc for descending
 
-arrange(citiesdata,desc(lives))
+arrange(citiesdata,desc(ptrans))
 
 # Summarise
 
