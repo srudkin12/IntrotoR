@@ -50,19 +50,6 @@ ggplot(data = citiesdata) +
  geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = country)) +
  labs(x = "Public Transport", y = "Affordability of Houses")
 
-citiesdata$italy<-as.numeric(citiesdata$country=="IT")
-
-ggplot(data = citiesdata) +
- geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = italy)) +
- labs(x = "Public Transport", y = "Affordability of Houses") 
-
-citiesdata$italy<-as.numeric(citiesdata$country=="IT")
-
-ggplot(data = citiesdata) +
- geom_point(mapping = aes(x = ptrans, y = afford, size = highlives, color = italy)) +
- labs(x = "Public Transport", y = "Affordability of Houses") 
-
-
 ##############
 # Bar Charts #
 ##############
